@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req,res) => { //poderia usar function(req,res)
-    res.send("Hello World!");
-})
+const userRoute = require("./src/routes/user.route")
+
+app.use("/home", userRoute)
 
 app.listen(3000);
