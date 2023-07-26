@@ -1,6 +1,8 @@
-const route = require("express").Router();
-const userController = require("../controllers/user.controller");
-const { validId, validUser } = require("../middlewares/global.middleware");
+import express from "express";
+import userController from "../controllers/user.controller.js";
+import { validId, validUser } from "../middlewares/global.middleware.js";
+
+const route = express.Router();
 
 route.post("/", userController.create);
 
@@ -10,4 +12,4 @@ route.get("/:id", validId, validUser, userController.findById);
 
 route.patch("/:id", validId, validUser, userController.update);
 
-module.exports = route;
+export default route;
