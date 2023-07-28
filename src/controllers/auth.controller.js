@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { loginService } from "../services/auth.service.js";
+import { loginService, generateToken } from "../services/auth.service.js";
 
 const login = async (req, res) => {
 
@@ -17,7 +17,10 @@ const login = async (req, res) => {
         if (!passwordIsValid) {
             return res.status(400).send({ message: "Invalid User or Password" });
         }
-        res.send("Login Ok");
+
+        const token = generateToken(user.id);
+
+        res.send({token});   
     } catch (err) {
         res.status(500).send(err.message);
     }
