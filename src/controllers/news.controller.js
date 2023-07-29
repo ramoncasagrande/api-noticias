@@ -1,5 +1,5 @@
 
-import { createService, findAll } from "../services/news.service"
+import { createService, findAllService } from "../services/news.service.js"
 
 const create = async (req, res) => {
     try {
@@ -13,7 +13,7 @@ const create = async (req, res) => {
             title,
             text,
             banner,
-            id: "adicionar id aqui"
+            user: { _id: "64c07716d3409427fd9ae6eb" }
         })
         res.send(201)
     } catch (err) {
@@ -22,7 +22,14 @@ const create = async (req, res) => {
     
 };
 
-const findAll = (req, res) => {
-    const news = [];
+const findAll = async (req, res) => {
+    const news = await findAllService();
+
+    if (news.length === 0) {
+        return res.status(400).send({ message: "Empity" })
+    }
+
     res.send(news);
 }
+
+export { create, findAll }
